@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd">
+<suite name="Suite">
+   
+<test name="ToolsQA" >
+<parameter name="text" value="javatpoint"/>  
+   <groups>
+   <run>
+ <exclude name = "demo">
+   </exclude>
+   </run>
+   </groups>
+      <classes>
+      
+      <class name="data.Groups"/>
+     </classes>
+   </test>
+   
+</suite> <!-- Suite -->
