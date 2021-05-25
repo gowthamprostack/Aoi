@@ -1,29 +1,35 @@
 package data;
 
 
-import java.io.IOException;
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Map;
-
-import org.apache.commons.collections4.map.HashedMap;
+import org.apache.poi.ss.usermodel.SheetVisibility;
 import org.json.simple.JSONObject;
 import org.testng.Assert;
 import org.testng.annotations.DataProvider;
 import org.testng.annotations.Test;
 
-import com.fasterxml.jackson.databind.ObjectMapper;
-
-import Extractresponse.Ext;
-import Request.LocationAs;
-import Request.Requestbody;
 import io.restassured.RestAssured;
+import static  io.restassured.RestAssured.*;
+
+import static org.hamcrest.Matchers.*;
+
+import java.io.IOException;
+import java.util.ArrayList;
+import java.util.List;
+
 import io.restassured.http.Method;
 import io.restassured.parsing.Parser;
 import io.restassured.path.json.JsonPath;
 import io.restassured.response.Response;
 import io.restassured.specification.RequestSpecification;
 import utilities.Excelread;
+
+import com.fasterxml.jackson.annotation.JsonAutoDetect;
+import com.fasterxml.jackson.annotation.JsonAutoDetect.Visibility;
+import com.fasterxml.jackson.databind.DeserializationFeature;
+import com.fasterxml.jackson.databind.ObjectMapper;
+
+import Extractresponse.Details;
+import Extractresponse.Ext;
 
 public class TC001_Get_whether extends Baseclass {
 	
@@ -35,30 +41,28 @@ public class TC001_Get_whether extends Baseclass {
 	void get()
 	{
 		
-		System.out.println("get call");
+        List<Details> l1=new ArrayList<>();	
+		RestAssured.baseURI="https://reqres.in";
+			
+		Ext a=given().queryParam("page", "2").expect().defaultParser(Parser.JSON).when().get("api/users").as(Ext.class);
 		
-		Response=httprequest.request(Method.GET,"/api/users?page=2");
-
-		System.out.println(Response.getBody().asString());
+	
+		System.out.println(a.getSupport().getText());
+		
+		int c=a.getData().size();
+		System.out.println(c);
 		
 		
-
-		Ext c= Response.as(Ext.class);
-		
-		ObjectMapper Obj = new ObjectMapper();
-		 
-        try {
- 
-            // get Oraganisation object as a json string
-            String jsonStr = Obj.writeValueAsString(c);
- 
-            // Displaying JSON String
-            System.out.println(jsonStr);
-        }
- 
-        catch (IOException e) {
-            e.printStackTrace();
-        }
+	   l1=a.getData();
+	   
+	   for(int i=0;i<l1.size();i++)
+	   {
+		   
+		   Details d=l1.get(i);
+		   System.out.println(d.getEmail());
+		   
+	   }
+	   
 		
     }
 	

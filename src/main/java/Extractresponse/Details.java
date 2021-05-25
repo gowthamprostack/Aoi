@@ -7,6 +7,7 @@ public class Details {
 	private String first_name;
 	private String last_name;
 	private String avatar;
+	
 	public int getId() {
 		return id;
 	}

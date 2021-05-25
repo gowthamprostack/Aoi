@@ -1,6 +1,6 @@
 package Extractresponse;
 
-public class support {
+public class Asupport {
 
 	
      private String url;

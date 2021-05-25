@@ -1,6 +1,8 @@
 package Extractresponse;
 
+import java.util.Arrays;
 import java.util.List;
+
 
 public class Ext {
 	private int page;
@@ -8,16 +10,18 @@ public class Ext {
 	private int total;
 	private int total_pages;
 	private List<Details> data;
-	private support sup;
+	private Asupport support;
 	
 	
 	
-	public support getSup() {
-		return sup;
+	
+	public Asupport getSupport() {
+		return support;
 	}
-	public void setSup(support sup) {
-		this.sup = sup;
+	public void setSupport(Asupport support) {
+		this.support = support;
 	}
+	
 	public int getPage() {
 		return page;
 	}
